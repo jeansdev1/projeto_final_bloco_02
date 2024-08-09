@@ -1,7 +1,7 @@
 import { Type } from "class-transformer"
 import { IsDate, IsNotEmpty, IsOptional } from "class-validator"
+import { Categoria } from "src/categoria/entities/categoria.entity"
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-
 
 
 @Entity({name: "tb_produtos"})
@@ -37,5 +37,10 @@ export class Produto {
     @IsNotEmpty()
     @Column({ type: 'int', nullable: false })
     estoque: number
+
+    @ManyToOne(() => Categoria, (categoria) => categoria.produto ,{
+        onDelete: "CASCADE"
+    })
+        categoria: Categoria;
 }
 
